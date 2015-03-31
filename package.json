@@ -1,0 +1,24 @@
+{
+  "name": "array-diff",
+  "version": "1.0.0",
+  "description": "Diff an array.",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucthev/array-diff"
+  },
+  "keywords": [
+    "array",
+    "diff",
+    "string"
+  ],
+  "author": "Luc Thevenard <lucthevenard@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucthev/array-diff/issues"
+  },
+  "homepage": "https://github.com/lucthev/array-diff"
+}
