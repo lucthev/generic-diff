@@ -38,6 +38,32 @@ test('Uniformity', function (t) {
   t.ok(isUniform('abcde', 'afghe'), 'Swapping in the middle')
 })
 
+test('Custom equality', function (t) {
+  t.plan(1)
+
+  var a = [{ x: 1 }, { x: 2 }, { x: 3 }]
+  var b = [{ x: 2 }, { x: 3 }, { x: 1 }]
+  var changes = arrayDiff(a, b, function (a, b) {
+    return a.x === b.x
+  })
+
+  var str = changes.map(function (edit) {
+    edit.items = edit.items.map(function (item) {
+      return item.x
+    })
+
+    if (edit.added) {
+      return '+' + edit.items.join('')
+    } else if (edit.removed) {
+      return '-' + edit.items.join('')
+    } else {
+      return edit.items.join('')
+    }
+  }).join(',')
+
+  t.equal(str, '-1,23,+1', 'Custom equality')
+})
+
 function diff (a, b) {
   var changes = arrayDiff(a, b)
 

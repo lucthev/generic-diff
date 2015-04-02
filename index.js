@@ -4,7 +4,9 @@ module.exports = diff
 
 var assign = require('object-assign')
 
-function diff (a, b) {
+function diff (a, b, eql) {
+  eql = eql || strictEqual
+
   var N = a.length
   var M = b.length
   var MAX = N + M
@@ -24,7 +26,7 @@ function diff (a, b) {
       }
 
       y = x - k
-      while (x < N && y < M && a[x] === b[y]) {
+      while (x < N && y < M && eql(a[x], b[y])) {
         x += 1
         y += 1
       }
@@ -41,6 +43,10 @@ function diff (a, b) {
 
   // ?
   throw Error('Unreachable diff path reached')
+}
+
+function strictEqual (a, b) {
+  return a === b
 }
 
 function buildEdits (Vs, a, b) {
