@@ -1,7 +1,7 @@
 {
-  "name": "array-diff",
+  "name": "generic-diff",
   "version": "1.0.0",
-  "description": "Diff an array.",
+  "description": "Diff any array-like object, including strings",
   "main": "index.js",
   "scripts": {
     "test": "node test/spec.js"
@@ -13,7 +13,8 @@
   "keywords": [
     "array",
     "diff",
-    "string"
+    "string",
+    "difference"
   ],
   "author": "Luc Thevenard <lucthevenard@gmail.com>",
   "license": "MIT",

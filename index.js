@@ -4,6 +4,18 @@ module.exports = diff
 
 var assign = require('object-assign')
 
+/**
+ * diff(a, b [, eql]) diffs the array-like objects `a` and `b`, returning
+ * a summary of the edits made. By default, strict equality (`===`) is
+ * used to compare items in `a` and `b`; if this will not work (for example,
+ * if the items in `a` and `b` are objects), a custom equality function,
+ * `eql`, may be passed as a third argument.
+ *
+ * @param {Array} a
+ * @param {Array} b
+ * @param {Function} eql
+ * @return {Array}
+ */
 function diff (a, b, eql) {
   eql = eql || strictEqual
 
@@ -45,10 +57,20 @@ function diff (a, b, eql) {
   throw Error('Unreachable diff path reached')
 }
 
+// Self-explanatory. Used when no euqality function is given to diff()
 function strictEqual (a, b) {
   return a === b
 }
 
+/**
+ * buildEdits(Vs, a, b) builds an array of edits from the edit graph,
+ * `Vs`, of `a` and `b`.
+ *
+ * @param {Array} Vs
+ * @param {Array} a
+ * @param {Array} b
+ * @return {Array}
+ */
 function buildEdits (Vs, a, b) {
   var edits = []
 
@@ -87,6 +109,15 @@ function buildEdits (Vs, a, b) {
   return edits.reverse()
 }
 
+/**
+ * pushEdit(edits, item, added, removed) adds the given item to the array
+ * of edits. Similar edits are grouped together for conciseness.
+ *
+ * @param {Array} edits
+ * @param {*} item
+ * @param {Boolean} added
+ * @param {Boolean} removed
+ */
 function pushEdit (edits, item, added, removed) {
   var last = edits[edits.length - 1]
 
