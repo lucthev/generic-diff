@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lucthev/array-diff"
+    "url": "https://github.com/lucthev/generic-diff"
   },
   "keywords": [
     "array",
@@ -19,9 +19,9 @@
   "author": "Luc Thevenard <lucthevenard@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lucthev/array-diff/issues"
+    "url": "https://github.com/lucthev/generic-diff/issues"
   },
-  "homepage": "https://github.com/lucthev/array-diff",
+  "homepage": "https://github.com/lucthev/generic-diff",
   "devDependencies": {
     "tape": "^3.5.0"
   },
