@@ -57,7 +57,7 @@ function diff (a, b, eql) {
   throw Error('Unreachable diff path reached')
 }
 
-// Self-explanatory. Used when no euqality function is given to diff()
+// Used when no equality function is given to diff()
 function strictEqual (a, b) {
   return a === b
 }

@@ -26,7 +26,7 @@ The “summary of changes” is an array of objects with three properties: `item
 
 ## Example
 
-Diff two strings, character by character:
+Diff two strings, creating an HTML representation of their differences:
 
 ```js
 var diff = require('generic-diff')
@@ -46,61 +46,9 @@ console.log(changes)
 // 'fal<del>afe</del>l<ins>acy</ins>'
 ```
 
-Diff two files line-by-line, producing a diff-like output:
+For a slightly more involved example, [this gist][file-diff] demonstrates how to diff two files and produce an output similar to the UNIX `diff` command.
 
-```js
-#!/usr/bin/env node
-'use strict'
-
-var diff = require('generic-diff')
-var fs = require('fs')
-var os = require('os')
-
-// Takes an array of edits containing “one or more” items each, and turns
-// it into an array of edits with exactly one item per edit.
-function flatten (changes) {
-  return changes.reduce(function (arr, edit) {
-    return arr.concat(edit.items.map(function (item) {
-      return {
-        item: item,
-        added: edit.added,
-        removed: edit.removed
-      }
-    }))
-  }, [])
-}
-
-// Read two files passed in on the command line, splitting them at
-// newlines.
-var before = process.argv[2]
-before = fs.readFileSync(before, { encoding: 'utf-8' })
-before = before.split(/\r?\n/)
-
-var after = process.argv[3]
-after = fs.readFileSync(after, { encoding: 'utf-8' })
-after = after.split(/\r?\n/)
-
-// Perform the diff. Prepend added lines with a '+', removed lines with
-// a '-', and unchanged lines with a space.
-var changes = flatten(diff(before, after))
-changes = changes.map(function (edit) {
-  var pre = ' '
-
-  if (edit.added) {
-    pre = '+'
-  } else if (edit.removed) {
-    pre = '-'
-  }
-
-  return pre + edit.item
-})
-
-// That’s it!
-console.log(changes.join(os.EOL))
-```
-
-[Sample output from the above script](https://gist.github.com/lucthev/f7096f85442ec448cb64).
-
+[file-diff]: https://gist.github.com/lucthev/f7096f85442ec448cb64
 [diff]: http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.4.6927
 
 ## LICENSE
