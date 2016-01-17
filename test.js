@@ -1,7 +1,7 @@
 'use strict'
 
 var test = require('tape')
-var arrayDiff = require('../')
+var arrayDiff = require('./')
 
 test('diff', function (t) {
   t.plan(13)
